@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+
+class userController extends Controller
+{
+    public function index()
+    {
+        $user = User::all();
+        
+        return view('user.index', compact('user'));
+    }
+
+    public function create()
+    {
+        return view('user.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'email:dns',
+            'role' => 'required',
+        ],[
+            'name.required'=> 'nama user wajib diisi',
+            'name.min'=> 'nama user minimal 3 huruf',
+            'email.email' => 'penulisan email haruf valid contoh @gmail',
+            'role.required'=> 'bagian role wajib diisi',
+            
+        ]);
+
+        $password = substr(str_replace(' ', '', $request->name), 0, 3) . substr(str_replace(' ', '', $request->email), 0, 3);
+
+        User::create([
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'role' =>$request->role,
+            'password' => Hash::make($password), // Corrected line
+        ]);
+
+        return redirect()->back()->with('success', 'Berhasil menambahkan data user');
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required',
+            'role' => 'required',
+        ]);
+
+        User::where('id', $id)->update([
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'role' =>$request->role,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('user.home')->with('success', 'Berhasil mengubah user!');
+    }
+
+    public function destroy($id)
+    {
+        User::where('id', $id)->delete();
+
+        return redirect()->back()->with('deleted', 'user berhasil dihapus!');
+    }
+}
