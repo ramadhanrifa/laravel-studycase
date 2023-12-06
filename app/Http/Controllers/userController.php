@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 class userController extends Controller
@@ -15,6 +16,7 @@ class userController extends Controller
         
         return view('user.index', compact('user'));
     }
+
 
     public function create()
     {
@@ -77,5 +79,29 @@ class userController extends Controller
         User::where('id', $id)->delete();
 
         return redirect()->back()->with('deleted', 'user berhasil dihapus!');
+    }
+
+
+
+    public function loginAuth(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email:dns',
+            'password' => 'required'
+        ]);
+        
+        $user = $request->only(['email', 'password']);
+        if(Auth::attempt($user)){
+            return redirect()->route('home.page');
+        }else{
+            return redirect()->back()->with('failed', 'Proses login gagal, silahkan coba kembali dengan daya yang benar!');
+
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('logout', 'Anda telah logout! <br> terimakasih telah menggunakan website ini!!');
     }
 }
