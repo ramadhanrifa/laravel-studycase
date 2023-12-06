@@ -6,7 +6,7 @@
         @if (Session::get('failed'))
             <div class="alert alert-danger">{{ Session::get('failed') }}</div>
         @endif
-        @if (Session::get('failed'))
+        @if (Session::get('failed'))    
             <div class="alert alert-primary">{{ Session::get('logout') }}</div>
         @endif
         @if(Session::get('canAccess'))

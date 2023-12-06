@@ -30,17 +30,25 @@
                       <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
                     </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Pembelian</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('user.home') }}">Kelola akun</a>
-                  </li>
                   @if (Auth::check())
-                    <li class="nav-item">
-                      <a href="{{ route('logout') }}" class="nav-link">Logout</a>
-                    </li>
-                  @endif
+                    @if(Auth::user()->role == 'admin')
+                      
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Pembelian</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('user.home') }}">Kelola akun</a>
+                      </li>
+                    @else 
+                      <li class="nav-item">
+                        <a href="{{ route('kasir.order.index') }}" class="nav-link" aria-current="page"></a>
+                      </li>
+                    @endif  
+                        <li class="nav-item">
+                          <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+                        </li>
+                    
+                @endif
                 
                 </ul>
               </div>

@@ -3,6 +3,10 @@
 @section('content')
 
 <div class="jumbotron py-4 px-5">
+    @csrf
+        @if(Session::get('alreadyIn'))
+            <div class="alert alert-danger">{{ Session::get('alreadyIn') }}</div>
+        @endif
     <h1 class="display-4">
         Selamat Datang ! 
         {{ Auth::user()->name }}

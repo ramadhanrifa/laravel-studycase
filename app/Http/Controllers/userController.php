@@ -88,11 +88,15 @@ class userController extends Controller
         $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required'
-        ]);
+        ], [
+            "email.email:dns" => 'harap masukan email yang valid',
+        ]
+    
+    );
         
         $user = $request->only(['email', 'password']);
         if(Auth::attempt($user)){
-            return redirect()->route('home.page');
+            return redirect()->route('home.page');      
         }else{
             return redirect()->back()->with('failed', 'Proses login gagal, silahkan coba kembali dengan daya yang benar!');
 
