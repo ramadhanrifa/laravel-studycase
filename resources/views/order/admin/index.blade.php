@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="my-5 d-flex justify-content-end">
-        <a href="{{ route('order.export.excel') }}" class="btn btn-primary">Export Data (excel)</a>
+        <a href="{{ route('user.export-excel') }}" class="btn btn-primary">Export Data (excel)</a>
     </div>
     <table class="table table-striped table-bordered table-hover">
         <thead>

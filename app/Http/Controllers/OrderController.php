@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use PDF;
 use Carbon\Carbon;
 use Excel;
+use App\Exports\OrdersExport;
 
 
 
@@ -148,9 +149,9 @@ class OrderController extends Controller
     {
         $file_name = 'data_pembelian'. '.xlsx';
 
-        return Excel::download(new OrderExport, $file_name);
+        return Excel::download(new OrdersExport, $file_name);
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
