@@ -27,7 +27,7 @@ class userController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3',
-            'email' => 'email:dns',
+            'email' => 'required',
             'role' => 'required',
         ],[
             'name.required'=> 'nama user wajib diisi',
@@ -86,10 +86,11 @@ class userController extends Controller
     public function loginAuth(Request $request)
     {
         $request->validate([
-            'email' => 'required|email:dns',
-            'password' => 'required'
+            'email' => 'required|',
+            'password' => 'required',
         ], [
-            "email.email:dns" => 'harap masukan email yang valid',
+            "email.required" => 'harap masukan email yang valid',
+            "password.required" => "harap masukan password",
         ]
     
     );

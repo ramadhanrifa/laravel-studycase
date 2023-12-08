@@ -19,4 +19,10 @@ class Order extends Model
     protected $casts = [
         'medicines' => 'array',
     ];
+
+    public function user()
+    {
+        // menghubungkan primary key 
+        return $this->belongsTo(User::class);
+    }
 }

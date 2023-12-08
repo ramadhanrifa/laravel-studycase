@@ -43,4 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function index()
+    {
+        // mengambil seluruh data pada table orders dengan pagination per 10 halaman serta mengambil hasil
+        // data relasi function bernama user pada model order
+        $orders = Order::with('user')->simplePaginate(10);
+        return view("order.kasir.index");
+    }
 }

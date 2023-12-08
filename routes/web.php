@@ -4,6 +4,7 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\userController;
 use App\Models\Medicine;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,12 +60,20 @@ Route::middleware(['IsGuest'])->group(function() {
 
         });
 
+        Route::prefix('/order')->name('user.')->group(function() {
+             Route::get('/data', [OrderController::class, 'data'])->name('data'); 
+             Route::get('/export-excel', [OrderController::class, 'exportExcel'])->name('export-excel');  
         });
 
+    });
     Route::middleware(['IsLogin', 'IsKasir'])->group(function() {
         Route::prefix('/kasir')->name('kasir.')->group(function(){
             Route::prefix('/order')->name('order.')->group(function() {
                 Route::get('/', [OrderController::class, 'index'])->name('index');
+                Route::get('/create', [OrderController::class, 'create'])->name('create');
+                Route::post('/store', [OrderController::class, 'store'])->name('store');
+                Route::get('/print/{id}', [OrderController::class, 'show'])->name('print');
+                Route::get('/download/{id}', [OrderController::class, 'downloadPDF'])->name('download');
             });
         });
     });

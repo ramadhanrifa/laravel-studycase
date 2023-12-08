@@ -20,28 +20,28 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('home.page') }}">Dashboard</a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Obat
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{{ route('medicine.home') }}">Data Obat</a></li>
-                      <li><a class="dropdown-item" href="{{ route('medicine.create') }}">Tambah</a></li>
-                      <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
-                    </ul>
-                  </li>
+                  
                   @if (Auth::check())
                     @if(Auth::user()->role == 'admin')
-                      
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Obat
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('medicine.home') }}">Data Obat</a></li>
+                        <li><a class="dropdown-item" href="{{ route('medicine.create') }}">Tambah</a></li>
+                        <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
+                      </ul>
+                    </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Pembelian</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('user.data') }}">Pembelian</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('user.home') }}">Kelola akun</a>
                       </li>
                     @else 
                       <li class="nav-item">
-                        <a href="{{ route('kasir.order.index') }}" class="nav-link" aria-current="page"></a>
+                        <a href="{{ route('kasir.order.index') }}" class="nav-link" aria-current="page">Pembelian</a>
                       </li>
                     @endif  
                         <li class="nav-item">
