@@ -13,7 +13,7 @@ class userController extends Controller
     public function index()
     {
         $user = User::all();
-        
+
         return view('user.index', compact('user'));
     }
 
@@ -34,7 +34,7 @@ class userController extends Controller
             'name.min'=> 'nama user minimal 3 huruf',
             'email.email' => 'penulisan email haruf valid contoh @gmail',
             'role.required'=> 'bagian role wajib diisi',
-            
+
         ]);
 
         $password = substr(str_replace(' ', '', $request->name), 0, 3) . substr(str_replace(' ', '', $request->email), 0, 3);
@@ -92,12 +92,12 @@ class userController extends Controller
             "email.required" => 'harap masukan email yang valid',
             "password.required" => "harap masukan password",
         ]
-    
+
     );
-        
+
         $user = $request->only(['email', 'password']);
         if(Auth::attempt($user)){
-            return redirect()->route('home.page');      
+            return redirect()->route('home.page');
         }else{
             return redirect()->back()->with('failed', 'Proses login gagal, silahkan coba kembali dengan daya yang benar!');
 

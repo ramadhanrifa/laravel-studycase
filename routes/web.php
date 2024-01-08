@@ -61,8 +61,8 @@ Route::middleware(['IsGuest'])->group(function() {
         });
 
         Route::prefix('/order')->name('user.')->group(function() {
-             Route::get('/data', [OrderController::class, 'data'])->name('data'); 
-             Route::get('/export-excel', [OrderController::class, 'exportExcel'])->name('export-excel');  
+             Route::get('/data', [OrderController::class, 'data'])->name('data');
+             Route::get('/export-excel', [OrderController::class, 'exportExcel'])->name('export-excel');
         });
 
     });

@@ -34,17 +34,17 @@ class OrderController extends Controller
 
         }
 
-        
+
     return view('order.kasir.index', compact('orders'));
 
     }
-    
+
     public function data()
     {
         $orders= Order::with('user')->simplePaginate(5);
         return view("order.admin.index", compact('orders'));
-    }  
-   
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -73,7 +73,7 @@ class OrderController extends Controller
         foreach ($arrayDistinct as $id => $count){
             // mencari data obat berdasarkan id
             $medicine = Medicine::where('id', $id)->first();
-            // ambil bagian column price dari hasil pencarian lalu kalikan dengan jumlah item duplikat 
+            // ambil bagian column price dari hasil pencarian lalu kalikan dengan jumlah item duplikat
             // sehingga akan menghasilkan total harga
             $subPrice = $medicine['price'] * $count;
             // struktur value column medicines menjadi multidimensi dengan dimensi kedua berbentuk array assoc
@@ -86,7 +86,7 @@ class OrderController extends Controller
                 "sub_price" => $subPrice,
             ];
 
-            // masukan struktur array tersebut ke array kosong yang disediakan sebelumnya
+            // maasukan struktur array tersebut ke array kosong yang disediakan sebelumnya
             array_push($arrayAssocMedicines, $arrayitem);
         }
         // total harga pembelian dari obat-obat yang dipilih
@@ -177,5 +177,5 @@ class OrderController extends Controller
         //
     }
 
-    
+
 }

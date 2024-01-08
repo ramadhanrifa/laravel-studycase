@@ -4,11 +4,11 @@ namespace App\Exports;
 
 use App\Models\Order;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concers\WithHeadings;
-use Maatwebsite\Excel\Concers\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use Excel;
 
-class OrdersExport implements FromCollection
+class OrdersExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
